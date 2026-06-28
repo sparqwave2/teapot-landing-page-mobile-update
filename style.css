@@ -603,22 +603,68 @@ select:focus, .customer-info input:focus, .customer-info textarea:focus, .advanc
     padding: 80px 20px;
     background: var(--bg-color);
 }
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 80px;
-}
-.reviews-grid img {
+/* Customer Review Carousel */
+.review-carousel-wrapper {
+    position: relative;
     width: 100%;
-    height: auto;
+    max-width: 600px;
+    margin: 0 auto 80px;
+    overflow: hidden;
     border-radius: 16px;
     box-shadow: var(--shadow-lg);
+    background: #000;
+}
+.review-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+.review-carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.review-carousel-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    cursor: zoom-in;
     transition: transform 0.3s ease;
 }
-.reviews-grid img:hover {
-    transform: translateY(-8px);
+.review-carousel-slide img:hover {
+    transform: scale(1.02);
 }
+
+/* Navigation Buttons */
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s, transform 0.2s;
+}
+.carousel-prev:hover,
+.carousel-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+.carousel-prev { left: 15px; }
+.carousel-next { right: 15px; }
 
 /* FAQ Accordion */
 .faq-container {
@@ -912,27 +958,7 @@ select:focus, .customer-info input:focus, .customer-info textarea:focus, .advanc
         justify-content: space-between;
     }
 
-    /* 2. Review Section Images Responsive Grid */
-    .reviews-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    .reviews-grid img {
-        display: block;
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 8px;
-        transform: scale(1);
-        transition: transform 0.2s ease;
-        cursor: pointer;
-        box-shadow: var(--shadow);
-        margin: 0;
-    }
-    .reviews-grid img:hover {
-        transform: scale(1.05);
-    }
+    /* 2. Removed Review Grid - Replaced with Carousel */
     
     /* Mobile Sticky Cart */
     .mobile-sticky-cart {

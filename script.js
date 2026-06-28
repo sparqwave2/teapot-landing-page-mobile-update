@@ -429,4 +429,69 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Customer Review Carousel Logic
+    const carouselTrack = document.querySelector('.review-carousel-track');
+    const carouselSlides = document.querySelectorAll('.review-carousel-slide');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+
+    if (carouselTrack && carouselSlides.length > 0) {
+        let currentIndex = 0;
+        const totalSlides = carouselSlides.length;
+        let autoPlayInterval;
+
+        function updateCarousel() {
+            carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 10000); // 10 seconds
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoPlay();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoPlay();
+        });
+
+        // Initialize autoplay
+        startAutoPlay();
+
+        // Hook into existing Lightbox to pause/resume
+        lightboxTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                clearInterval(autoPlayInterval); // Pause when zooming
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            resetAutoPlay(); // Resume when closing
+        });
+
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal || e.target.classList.contains('lightbox-content-wrapper')) {
+                resetAutoPlay(); // Resume when closing
+            }
+        });
+    }
 });
