@@ -27,6 +27,7 @@ body {
 h1, h2, h3, h4 {
     color: var(--text-main);
     font-weight: 700;
+    line-height: 1.25;
 }
 .section-title {
     font-size: 2.2rem;
@@ -919,6 +920,25 @@ select:focus, .customer-info input:focus, .customer-info textarea:focus, .advanc
 }
 
 @media (max-width: 768px) {
+    /* Mobile Heading Polish */
+    h1, h2, h3, h4 { line-height: 1.2 !important; }
+    .hero-content h1 { font-size: 1.8rem !important; margin-bottom: 15px !important; }
+    .section-title { font-size: 1.5rem !important; margin-bottom: 20px !important; }
+    
+    /* White Space Reduction */
+    .features-section, .real-gallery-section, .social-proof-section, .product-section, .usage-care-section {
+        padding: 40px 12px !important;
+    }
+
+    /* Refactor Review Carousel Section to Full Screen */
+    .review-carousel-wrapper {
+        width: calc(100% + 24px) !important;
+        max-width: none !important;
+        margin-left: -12px !important;
+        margin-bottom: 0 !important;
+        border-radius: 0 !important;
+    }
+
     /* 3. Overall Mobile Centering Layout Fix */
     html, body {
         width: 100%;

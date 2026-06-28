@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function startAutoPlay() {
-            autoPlayInterval = setInterval(nextSlide, 10000); // 10 seconds
+            autoPlayInterval = setInterval(nextSlide, 7000); // 7 seconds
         }
 
         function resetAutoPlay() {
