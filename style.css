@@ -912,26 +912,26 @@ select:focus, .customer-info input:focus, .customer-info textarea:focus, .advanc
         justify-content: space-between;
     }
 
-    /* 2. Review Section Images Zoom & Resize */
+    /* 2. Review Section Images Responsive Grid */
     .reviews-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
     .reviews-grid img {
-        width: 65px;
-        height: 65px;
+        display: block;
+        width: 100%;
+        height: auto;
         object-fit: cover;
-        border-radius: 4px;
+        border-radius: 8px;
         transform: scale(1);
         transition: transform 0.2s ease;
         cursor: pointer;
-        box-shadow: none;
+        box-shadow: var(--shadow);
         margin: 0;
     }
     .reviews-grid img:hover {
-        transform: scale(1.15);
+        transform: scale(1.05);
     }
     
     /* Mobile Sticky Cart */
