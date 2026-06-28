@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalOverlay = document.getElementById('success-modal');
     const btnCloseModal = document.getElementById('btn-close-modal');
 
+    // Sticky Cart Elements
+    const mobileStickyCart = document.getElementById('mobile-sticky-cart');
+    const stickyCartText = document.getElementById('sticky-cart-text');
+    const btnStickyCheckout = document.getElementById('btn-sticky-checkout');
+    const messengerBtn = document.querySelector('.messenger-btn');
+
     // Accordion Elements
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
@@ -145,6 +151,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         summaryTotal.innerText = `৳ ${toBnNum(total)}`;
+
+        // Mobile Sticky Cart Update
+        if (mobileStickyCart && stickyCartText) {
+            if (totalItems > 0) {
+                mobileStickyCart.classList.add('active');
+                if (messengerBtn) messengerBtn.classList.add('cart-active');
+                stickyCartText.innerText = `নির্বাচিত: ${toBnNum(totalItems)} টি | মোট বিল: ৳${toBnNum(total)}`;
+            } else {
+                mobileStickyCart.classList.remove('active');
+                if (messengerBtn) messengerBtn.classList.remove('cart-active');
+            }
+        }
     }
 
     // Product Quantity Handlers
@@ -385,4 +403,14 @@ document.addEventListener('DOMContentLoaded', () => {
             closeLightbox();
         }
     });
+
+    // Mobile Sticky Checkout Scroll
+    if (btnStickyCheckout) {
+        btnStickyCheckout.addEventListener('click', () => {
+            const checkoutSection = document.getElementById('cart-summary-box');
+            if (checkoutSection) {
+                checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
 });
