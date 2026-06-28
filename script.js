@@ -337,21 +337,20 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: new URLSearchParams(orderData).toString()
         })
-        .then(response => {
-            console.log('Data sent to Google Sheets successfully');
-            // Restore button state
-            btnSubmitOrder.innerText = originalBtnText;
-            btnSubmitOrder.disabled = false;
+        .then(() => {
+            console.log('Data successfully sent to Google Sheets');
             
-            // Show Success Modal
-            modalOverlay.classList.add('active');
-            
-            // Trigger Facebook Pixel Purchase event
+            // Trigger Facebook Pixel Purchase event after successful dispatch
             if (typeof fbq === 'function') {
                 fbq('track', 'Purchase', { content_name: 'Glass Teapot Order', value: grandTotal, currency: 'BDT' });
             }
 
-            // Reset form fields
+            // Restore button state and Show Success Modal
+            btnSubmitOrder.innerText = originalBtnText;
+            btnSubmitOrder.disabled = false;
+            modalOverlay.classList.add('active');
+
+            // ONLY reset form fields AFTER the fetch data has been processed and dispatched
             document.getElementById('cust-name').value = '';
             document.getElementById('cust-phone').value = '';
             document.getElementById('cust-address').value = '';
@@ -361,8 +360,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('payment-trx').value = '';
             }
         })
-        .catch(error => {
-            console.error('Error sending data to Google Sheets:', error);
+        .catch(err => {
+            console.error('Error:', err);
             alert('অর্ডার সাবমিট করতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন বা হোয়াটসঅ্যাপে যোগাযোগ করুন।');
             btnSubmitOrder.innerText = originalBtnText;
             btnSubmitOrder.disabled = false;
