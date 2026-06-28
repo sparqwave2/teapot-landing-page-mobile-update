@@ -335,9 +335,10 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: new URLSearchParams(orderData)
+            body: new URLSearchParams(orderData).toString()
         })
         .then(response => {
+            console.log('Data sent to Google Sheets successfully');
             // Restore button state
             btnSubmitOrder.innerText = originalBtnText;
             btnSubmitOrder.disabled = false;
@@ -361,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(error => {
-            console.error('Error submitting order:', error);
+            console.error('Error sending data to Google Sheets:', error);
             alert('অর্ডার সাবমিট করতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন বা হোয়াটসঅ্যাপে যোগাযোগ করুন।');
             btnSubmitOrder.innerText = originalBtnText;
             btnSubmitOrder.disabled = false;
