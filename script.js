@@ -185,6 +185,17 @@ document.addEventListener('DOMContentLoaded', () => {
             cart[id].qty++;
             input.value = cart[id].qty;
             updateCart();
+            
+            // Trigger Facebook Pixel AddToCart event
+            let totalBill = 0;
+            for (const key in cart) {
+                if (cart[key].qty > 0) {
+                    totalBill += cart[key].qty * cart[key].price;
+                }
+            }
+            if (typeof fbq === 'function') {
+                fbq('track', 'AddToCart', { content_name: 'Glass Teapot', value: totalBill, currency: 'BDT' });
+            }
         });
     });
 
@@ -334,6 +345,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show Success Modal
             modalOverlay.classList.add('active');
             
+            // Trigger Facebook Pixel Purchase event
+            if (typeof fbq === 'function') {
+                fbq('track', 'Purchase', { content_name: 'Glass Teapot Order', value: grandTotal, currency: 'BDT' });
+            }
+
             // Reset form fields
             document.getElementById('cust-name').value = '';
             document.getElementById('cust-phone').value = '';
